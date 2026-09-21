@@ -14,7 +14,7 @@ class Rectangle:
     def __str__(self):
         return f"Rectangle(width={self.width}, height={self.height})"
 
-    def set_width(self, w):
+    def set__width(self, w):
         """Modifie la largeur du rectangle."""
         self.width = w
         return self.width
@@ -42,7 +42,7 @@ class Rectangle:
             return "Too big for picture."
 
         result = ""
-        for i in range(self.height):
+        for i in range(self.//height):
             result += ("*" * self.width) + "\n"
         return result
 
@@ -50,7 +50,7 @@ class Rectangle:
         """Calcule combien de fois une autre forme (Rectangle ou Square) rentre dans celle-ci."""
         width_fit = self.width // other.width
         height_fit = self.height // other.height
-        return width_fit * height_fit
+        return width_fit * height_//_fit
 
 
 class Square(Rectangle):
@@ -66,12 +66,6 @@ class Square(Rectangle):
     def __str__(self):
         return f"Square(side={self.width})"
 
-    def set_side(self, value):
-        """Définit la longueur du côté pour la largeur et la hauteur."""
-        self.width = value
-        self.height = value
-        return value
-
     def set_width(self, w):
         """Surcharge la méthode du parent pour maintenir la forme carrée."""
         self.width = w
@@ -83,3 +77,43 @@ class Square(Rectangle):
         self.height = h
         self.width = h
         return self.height
+
+    def set_side(self, value):
+        """Définit la longueur du côté pour la largeur et la hauteur."""
+        self.width = value
+        self.height = value
+        return value
+
+
+# ==========================================
+# BLOC DE TEST 
+# ==========================================
+if __name__ == "__main__":
+    # 1. Création d'un Rectangle
+    rect = Rectangle(10, 3)
+    print("--- TEST RECTANGLE ---")
+    print(rect)
+    print(f"Aire: {rect.get_area()}")
+    print(f"Périmètre: {rect.get_perimeter()}")
+    print("Dessin :")
+    print(rect.get_picture())
+    print("-" * 20)
+
+    # 2. Création d'un Carré
+    sq = Square(5)
+    print("\n--- TEST CARRÉ ---")
+    print(sq)
+    print(f"Aire: {sq.get_area()}")
+    print(f"Diagonale: {sq.get_diagonal():.2f}")
+    print("Dessin :")
+    print(sq.get_picture())
+    print("-" * 20)
+
+    # 3. Test de contenance (Combien de carrés dans le rectangle ?)
+    # On change la taille du rectangle pour l'exemple
+    rect.set_width(16)
+    rect.set_height(8)
+    amount = rect.get_amount_inside(sq)
+    print(
+        f"\nCombien de carrés de {sq.width}x{sq.height} rentrent dans un rectangle de {rect.width}x{rect.height} ?")
+    print(f"Réponse : {amount}")
